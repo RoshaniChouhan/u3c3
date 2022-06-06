@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      #navbar{
+        height: 80px;
+        width: 100%;
+        background-color:gold;
+        display: flex;
+        justify-content: space-between;
+        color: black;
+      }
+      #navbar>h3{
+        margin-bottom: 20px;
+        margin-left: 30px;
+      }
+      a{
+        margin-bottom: 20px;
+        margin-left: 30px;
+      }
+      #form{
+        display: grid;
+        height: 350px;
+        width: 30%;
+        margin: auto;
+        gap :10px;
+      }
+      h1{
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <h3>Sign Up</h3>
+      <a href="voucher.html">Purchase Voucher</a>
+    </div>
+
+    <div id="form" >
+      <h1>Singup</h1>
+      <input type="text" id="name" placeholder="Name">
+      <input type="text" id="email" placeholder="Email">
+      <input type="text" id="address" placeholder="Address">
+      <input type="number" id="amount" placeholder="Add amount to walled">
+   <button id="submit" onclick="submit()">
+    submit
+
+   </button>
+  </div>
+    <!-- - name input box :- "name"
+  - email input box :- "email"
+  - Address input box :- "address"
+  - Amount input box :- "amount" 
+  - Submit button :- "submit"
+  - The user will be stored with key:- "user"
+  - The input fields should become empty after submitting -->
+  </body>
+</html>
+
+<script>
+
+// function Sing(n,e,A,a){
+//   this.name=n;
+//   this.email=e;
+//   this.address=A;
+//   this.amount=a;
+// }
+
+let arr=JSON.parse(localStorage.getItem("user"))||[];
+
+
+// document.querySelector("button").addEventListener("click",submit())
+  function submit(){
+// console.log("some one click")
+    // event.preventDefault();
+    // let form=document.getElementById("form");
+    // let Name=form.name.value;
+    // let email=form.email.value;
+    // let address=form.address.value;
+    // let amount=form.amount.value;
+ let name=document.querySelector("#name").value
+ let email=document.querySelector("#email").value
+ let address=document.querySelector("#address").value
+ let amount=document.querySelector("#amount").value
+//  let name=document.querySelector("#name").value
+
+
+arr.push(name,email,address,amount)
+// console.log(name)
+      // let P=new Sing(name,email,address,amount)
+      // console.log(name,email,address,amount)
+      localStorage.setItem("user",JSON.stringify(arr))
+ 
+// console.log(P)
+  }
+</script>

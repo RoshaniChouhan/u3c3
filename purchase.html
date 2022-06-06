@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purchases</title>
+    <style>
+       #navbar{
+        height: 80px;
+        width: 100%;
+        background-color:gold;
+        display: flex;
+        justify-content: space-between;
+        color: black;
+      }
+      #navbar>h3{
+        margin-bottom: 20px;
+        margin-left: 30px;
+      }
+      a{
+        margin-bottom: 20px;
+        margin-left: 30px;
+      }
+      #form{
+        display: grid;
+        height: 350px;
+        width: 30%;
+        margin: auto;
+        gap :10px;
+      }
+      h1{
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="navbar">
+      <h3>Buy Vouchers</h3>
+      <a href="voucher.html">MY Vouchers</a>
+      <h2 id="wallet_balance"></h2>
+    </div>
+    <!-- Wallet balence id:- "wallet_balance" (only number). -->
+    <div id="purchased_vouchers">
+
+    </div>
+    <!-- - All the purchased voucher will be appended in div with id as "purchased_vouchers".
+  - The remaining balance will show on the page inside h3 tag with id as "balance" -->
+  </body>
+</html>
+<script>
+
+
+
+  let arr= JSON.parse(localStorage.getItem("user"))||[]
+  let sum=0;
+  for(var i=0;i<arr.length;i++){
+    sum+=Number(arr[i])
+  }
+
+  let display=document.querySelector("#wallet_balance")
+
+  display.innerHTML=sum;
+
+  
+  function submit(){
+    let sub=document.querySelector("#submit").value;
+  }
+
+  async function getData(){
+try{
+let url=`https://masai-vouchers-api.herokuapp.com/api/vouchers`
+
+let res=await fetch(url)
+let data= await res.json()
+
+console.log(data.vouchers)
+} catch(err){
+  console.log(err)
+}
+}
+
+function  append(data){
+  let container=document.getElementById("purchased_vouchers")
+  data.map(el)
+    let box=document.createElement("div")
+
+    let name=document.createElement("h3")
+name.innerText=el.name
+    let image=document.createElement("img")
+image.src=el.img
+    let price =document.createElement("h3")
+    price.innerText=el.name
+  
+    let btn=document.createElement("button");
+    btn.innerText="buy"
+    btn.setAttribute("class","buy")
+    btn.addEventListener("click",function(){
+      buy(el)
+    })
+ 
+
+    box.append(name,image,price,btn)
+
+    document.querySelector("#purchased_vouchers").append(box)
+    // let box=document.createElement("div")
+}
+
+
+</script>
